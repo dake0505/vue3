@@ -14,7 +14,7 @@ const onLogin = async () => {
     const res = await login(loginForm)
     console.log(res)
     localStorage.setItem('ACCESS_TOKEN', res.data.token);
-    // router.push('/home')
+    router.push('/home')
   } catch (error) {
     console.log(error)
   }
