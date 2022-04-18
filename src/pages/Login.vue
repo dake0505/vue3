@@ -10,9 +10,14 @@ const loginForm = reactive({
   password: ''
 })
 const onLogin = async () => {
-  const res = await login(loginForm)
-  console.log(res)
-  router.push('/home')
+  try {
+    const res = await login(loginForm)
+    console.log(res)
+    localStorage.setItem('ACCESS_TOKEN', res.data.token);
+    // router.push('/home')
+  } catch (error) {
+    console.log(error)
+  }
 }
 const onRegister = ():void => { router.push('/register') }
 </script>

@@ -103,6 +103,7 @@ export class Request {
    * @param res 响应回调,根据不同响应进行不同操作
    */
   private static errorHandle(res: any) {
+    // console.log(res)
     // 状态码判断
     switch (res.status) {
       case 401:
@@ -113,7 +114,7 @@ export class Request {
         ElMessage.warning("请求的资源不存在");
         break;
       default:
-        ElMessage.warning("连接错误");
+        ElMessage.warning(res.data.errors[0].msg);
     }
   }
 }
