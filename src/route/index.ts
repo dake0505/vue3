@@ -3,22 +3,32 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const Login = () => import('../pages/Login.vue')
 const Home = () => import('../pages/Home.vue')
 const Register = () => import('../pages/Register.vue')
+const Resource = () => import('../pages/Resource.vue')
 
 const routes = [
   {
     path: '/login',
     name: 'login',
+    title: '登录',
     component: Login
   },
   {
     path: '/home',
     name: 'home',
+    title: '首页',
     component: Home
   },
   {
     path: '/register',
     name: 'register',
+    title: '注册',
     component: Register
+  },
+  {
+    path: '/resource',
+    name: 'resource',
+    title: '资源列表',
+    component: Resource
   }
 ]
 
