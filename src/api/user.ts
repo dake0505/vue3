@@ -7,3 +7,11 @@ export function login (params: any) {
     data: params
   })
 }
+
+export function getUserList (params: any) {
+  return Request.axiosInstance({
+    url: '/user-list',
+    method: 'get',
+    params
+  })
+}

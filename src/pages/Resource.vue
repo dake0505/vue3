@@ -32,7 +32,7 @@ onMounted(() => {
     <el-table-column prop="description" label="描述" />
     <el-table-column prop="tagList" label="标签">
       <template #default="scope">
-        <el-tag v-for="(item, index) in scope.row.tagList" style="margin:0 2px;">{{ item }}</el-tag>
+        <el-tag v-for="(item, index) in scope.row.tagList" :key="index" style="margin:0 2px;">{{ item }}</el-tag>
       </template>
     </el-table-column>
     <el-table-column prop="createdAt" label="创建时间">
