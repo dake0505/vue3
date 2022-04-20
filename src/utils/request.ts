@@ -71,7 +71,7 @@ export class Request {
         //     }
         // }
 
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
           // return Promise.resolve(response.data);
           return response;
         } else {

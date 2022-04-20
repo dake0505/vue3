@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-import { ref } from "@vue/reactivity";
-import { onMounted } from 'vue' 
-import { queryResourceList } from "@/api/resource";
+import { onMounted, reactive, ref } from 'vue' 
+import { queryResourceList, createResource, updateResource } from "@/api/resource";
+import { ElMessage } from 'element-plus'
 
 const resourceList = ref([])
 const handleClick = ():void => {}
 const onQueryResourceList = async () => {
   const res = await queryResourceList({ limit: 20, offset: 0 })
-  console.log(res)
   resourceList.value = res.data.resourceList
 }
 
@@ -17,6 +16,26 @@ const onCreateResource = () => {
 }
 const onCloseResourceDialog = () => {
   resourceDialog.value = false
+}
+
+const resourceForm = reactive({
+  title: '',
+  description: '',
+  tagList: []
+})
+const onSubmitResource = async () => {
+  try {
+    const res = await createResource(resourceForm)
+    console.log(res)
+    ElMessage({
+      message: '创建成功',
+      type: 'success'
+    })
+    onCloseResourceDialog()
+    onQueryResourceList()
+  } catch (error) {
+    console.log(error)
+  }
 }
 onMounted(() => {
   onQueryResourceList()
@@ -44,23 +63,43 @@ onMounted(() => {
     <el-table-column label="Operations" width="120">
       <template #default>
         <el-button type="text" size="small" @click="handleClick">Detail</el-button>
-        <el-button type="text" size="small">Edit</el-button>
+        <el-button type="text" size="small">Delete</el-button>
       </template>
     </el-table-column>
   </el-table>
   <el-dialog
     v-model="resourceDialog"
-    title="Tips"
+    title="资源详情"
     width="30%"
     :before-close="onCloseResourceDialog"
   >
-    <span>This is a message</span>
+    <el-form
+      ref="resourceFormRef"
+      :model="resourceForm"
+      label-width="120px"
+    >
+      <el-form-item label="标题">
+        <el-input v-model="resourceForm.title" />
+      </el-form-item>
+      <el-form-item label="描述">
+        <el-input v-model="resourceForm.description" />
+      </el-form-item>
+      <el-form-item label="标签">
+        <el-select
+          v-model="resourceForm.tagList"
+          multiple
+          placeholder="Select"
+          style="width: 240px"
+        >
+          <el-option label="vue" value="vue"/>
+          <el-option label="react" value="react"/>
+        </el-select>
+      </el-form-item>
+    </el-form>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="resourceDialog = false">Cancel</el-button>
-        <el-button type="primary" @click="resourceDialog = false"
-          >Confirm</el-button
-        >
+        <el-button type="primary" @click="onSubmitResource">Submit</el-button>
       </span>
     </template>
   </el-dialog>
