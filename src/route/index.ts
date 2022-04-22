@@ -5,6 +5,7 @@ const Home = () => import('../pages/Home.vue')
 const Register = () => import('../pages/Register.vue')
 const Resource = () => import('../pages/Resource.vue')
 const UserManage = () => import('../pages/UserManage.vue')
+const Warehouse = () => import('../pages/Warehouse.vue')
 
 const routes = [
   {
@@ -36,6 +37,12 @@ const routes = [
     name: 'user-manage',
     title: '用户列表',
     component: UserManage
+  },
+  {
+    path: '/ware-house',
+    name: 'ware-house',
+    title: '我的仓库',
+    component: Warehouse
   }
 ]
 

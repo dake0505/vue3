@@ -2,6 +2,8 @@
 import { ref, getCurrentInstance, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex';
+import { getSignIn } from '@/api/user'
+import { ElMessage } from 'element-plus'
 
 const { proxy } = getCurrentInstance() as any
 const router = useRouter()
@@ -35,6 +37,14 @@ const email = computed(() => {
   return store.state.userStore.userInfo.email
 })
 
+const onSignIn = async () => {
+  const res = await getSignIn()
+  console.log(res)
+  ElMessage({
+    message: res.data.msg,
+    type: 'success'
+  })
+}
 const onLogout = () => {
   router.push('/login')
 }
@@ -53,7 +63,8 @@ const onLogout = () => {
         placement="bottom"
         trigger="hover"
       >
-      <div style="text-align: center;">
+      <div style="text-align: center; display: flex; flex-direction: column;">
+        <el-button type="text" @click="onSignIn">签到</el-button>
         <el-button type="text" @click="onLogout">退出登录</el-button>
       </div>
         <template #reference>

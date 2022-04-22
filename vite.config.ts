@@ -5,6 +5,14 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  // css预处理器
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true
+      }
+    }
+  },
   resolve: {
     alias: [
       {

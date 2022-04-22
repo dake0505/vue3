@@ -15,3 +15,10 @@ export function getUserList (params: any) {
     params
   })
 }
+
+export function getSignIn () {
+  return Request.axiosInstance({
+    url: '/user/sign-in',
+    method: 'get'
+  })
+}
