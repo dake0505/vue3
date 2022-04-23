@@ -6,7 +6,6 @@ const userList = ref([])
 
 const queryUserList = async () => {
   const res = await getUserList({})
-  console.log(res)
   userList.value = res.data.userList
 }
 
