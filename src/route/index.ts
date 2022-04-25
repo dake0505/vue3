@@ -6,6 +6,7 @@ const Register = () => import('../pages/Register.vue')
 const Resource = () => import('../pages/Resource.vue')
 const UserManage = () => import('../pages/UserManage.vue')
 const Warehouse = () => import('../pages/Warehouse.vue')
+const Personal = () => import('../pages/Personal/Index.vue')
 
 const routes = [
   {
@@ -19,6 +20,12 @@ const routes = [
     name: 'home',
     title: '首页',
     component: Home
+  },
+  {
+    path: '/ware-house',
+    name: 'ware-house',
+    title: '我的仓库',
+    component: Warehouse
   },
   {
     path: '/register',
@@ -39,10 +46,18 @@ const routes = [
     component: UserManage
   },
   {
-    path: '/ware-house',
-    name: 'ware-house',
-    title: '我的仓库',
-    component: Warehouse
+    path: '/personal',
+    name: 'personal',
+    title: '个人中心',
+    component: Personal,
+    children: [
+      {
+        path: 'score',
+        name: 'score',
+        title: '我的积分',
+        component: () => import('@/pages/Personal/sub-pages/Score.vue')
+      }
+    ]
   }
 ]
 

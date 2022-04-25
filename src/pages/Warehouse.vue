@@ -3,6 +3,7 @@ import { ref, reactive, onMounted } from 'vue';
 import { createWarehouseCommodity, queryWarehouseCommodityList, updateWarehouseCommodity, deleteWarehouseCommodity } from "../api/warehouse"
 import { ElMessage } from 'element-plus';
 import type { FormInstance } from 'element-plus';
+import { Plus } from '@element-plus/icons-vue'
  
 const commodityDialog = ref(false)
 const commodityList = ref([])
@@ -100,7 +101,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-button @click="onUpdateCommodityDialog(true)">新增商品</el-button>
+  <div class="header">
+    <el-button :icon="Plus" type="primary" @click="onUpdateCommodityDialog(true)">新增商品</el-button>
+  </div>
   <el-dialog
     v-model="commodityDialog"
     title="商品详情"
@@ -151,13 +154,19 @@ onMounted(() => {
   <el-pagination
     v-model="commodityFilter.pageNumber"
     class="commodity-page"
-    background layout="prev, pager, next"
+    background layout="total, prev, pager, next"
     :total="commodityCount"
     @current-change="onPageChange"  
   />
 </template>
 
 <style lang="less" scoped>
+.header {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 15px 0;
+  padding: 0 10px;
+}
 .commodity-page {
   margin-top: 15px;
 }

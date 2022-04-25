@@ -22,3 +22,10 @@ export function getSignIn () {
     method: 'get'
   })
 }
+
+export function getSignInList () {
+  return Request.axiosInstance({
+    url: '/user/sign-in-list',
+    method: 'get'
+  })
+}
