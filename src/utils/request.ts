@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { ElMessage } from "element-plus";
+import { useRouter } from 'vue-router'
 
 export class Request {
   public static axiosInstance: AxiosInstance;
@@ -103,10 +104,12 @@ export class Request {
    * @param res 响应回调,根据不同响应进行不同操作
    */
   private static errorHandle(res: any) {
-    // console.log(res)
+    const router = useRouter()
     // 状态码判断
     switch (res.status) {
       case 401:
+        ElMessage.warning("登录过期")
+        router.push('/login')
         break;
       case 403:
         break;
