@@ -2,16 +2,20 @@
 import { useRouter } from 'vue-router'
 import { getSignIn } from '@/api/user'
 import { ElMessage } from 'element-plus'
-import { } from '@vueuse/core'
+import { useStorage } from '@vueuse/core'
 
 const router = useRouter()
 
 const onSignIn = async () => {
   const res = await getSignIn()
-  ElMessage({
-    message: res.data.msg,
-    type: 'success'
-  })
+  console.log(res)
+  if (res.data.code === 200) {
+    ElMessage({
+      message: res.data.msg,
+      type: 'success'
+    })
+    useStorage('sign-in', true)
+  }
 }
 
 const handleSelect = (key: string, keyPath: string[]) => {
